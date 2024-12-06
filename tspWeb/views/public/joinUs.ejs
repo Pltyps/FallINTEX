@@ -13,39 +13,39 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
- 
- </head>
- <body id="page-top">
-     <!-- Navigation -->
-     <nav class="navbar navbar-expand-lg fixed-top navbar-light" id="mainNav">
-         <div class="container">
-             <a class="navbar-brand" href="/">Turtle Shelter Project</a>
-             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                 <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="collapse navbar-collapse" id="navbarResponsive">
-                 <ul class="navbar-nav ms-auto">
-                     <li class="nav-item">
-                         <a class="nav-link <%= currentPage === 'past-events' ? 'active' : '' %>" href="/past-events">Past Events</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link <%= currentPage === 'event-request' ? 'active' : '' %>" href="/event-request">Event Request</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link <%= currentPage === 'volunteer-signup' ? 'active' : '' %>" href="/join-us">Join Us</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link <%= currentPage === 'contact-us' ? 'active' : '' %>" href="/contact-us">Contact Us</a>
-                     </li>
-                 </ul>
-             </div>
-         </div>
-     </nav>
+</head>
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">Turtle Shelter Project</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/past-events">Past Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/event-request">Event Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/join-us">Join Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact-us">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <!-- Page Content -->
+    <br><br>
     <div class="container mt-5">
-        <h1>Volunteer Signup</h1>
-        <p>We would love for you to join our efforts in protecting the turtles! Please fill in the details below.</p>
+        <h1>Volunteer Sign Up</h1>
+        <p>We would love for you to join our efforts! Please fill in the details below.</p>
 
         <!-- Volunteer Signup Form -->
         <form action="/signup" method="POST">
@@ -58,18 +58,144 @@
                 <input type="text" class="form-control" id="lastName" name="lastName" required>
             </div>
             <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city" required>
+            </div>
+            <div class="mb-3">
+                <label for="county" class="form-label">County</label>
+                <input type="text" class="form-control" id="county" name="county" required>
+            </div>
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <select class="form-select" id="state" name="state" required>
+                    <option value="" disabled selected>Select your state</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="DC">District of Columbia</option>
+                    <option value="AS">American Samoa</option>
+                    <option value="GU">Guam</option>
+                    <option value="MP">Northern Mariana Islands</option>
+                    <option value="PR">Puerto Rico</option>
+                    <option value="VI">U.S. Virgin Islands</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="distance" class="form-label">Preferred Distance for Service (in miles)</label>
+                <input type="number" class="form-control" id="distance" name="distance" min="0" required>
+            </div>
+            <div class="mb-3">
                 <label for="email" class="form-label">Email Address</label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                <label for="sewingLevel" class="form-label">Sewing Level</label>
+                <select class="form-select" id="sewingLevel" name="sewingLevel" required>
+                    <option value="" disabled selected>Select your sewing level</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                    <option value="None">None</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Willing to Teach?</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="teachYes" name="willingToTeach" value="true" required>
+                        <label class="form-check-label" for="teachYes">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="teachNo" name="willingToTeach" value="false">
+                        <label class="form-check-label" for="teachNo">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Willing to Lead an Event?</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="leadYes" name="willingToLead" value="true" required>
+                        <label class="form-check-label" for="leadYes">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="leadNo" name="willingToLead" value="false">
+                        <label class="form-check-label" for="leadNo">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="heardAboutUs" class="form-label">How Did You Hear About Us?</label>
+                <select class="form-select" id="heardAboutUs" name="heardAboutUs" required onchange="toggleOtherReason()">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Word of Mouth">Word of Mouth</option>
+                    <option value="Past Events">Past Events</option>
+                    <option value="Flyer">Flyer</option>
+                    <option value="Advertisement">Advertisement</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="mb-3" id="otherReasonField" style="display: none;">
+                <label for="otherReason" class="form-label">If Other, Please Specify (Max 100 characters)</label>
+                <input type="text" class="form-control" id="otherReason" name="otherReason" maxlength="100">
+            </div>
+            <div class="mb-3">
+                <label for="monthlyHours" class="form-label">Expected Monthly Hours of Service</label>
+                <input type="number" class="form-control" id="monthlyHours" name="monthlyHours" min="0" required>
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
     </div>
-
- 
+    <br><br>
 
     <!-- Footer Section -->
     <footer class="text-center py-4">
@@ -82,8 +208,12 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-
-
+    <script>
+        function toggleOtherReason() {
+            const heardAboutUs = document.getElementById("heardAboutUs");
+            const otherReasonField = document.getElementById("otherReasonField");
+            otherReasonField.style.display = heardAboutUs.value === "Other" ? "block" : "none";
+        }
+    </script>
 </body>
 </html>
