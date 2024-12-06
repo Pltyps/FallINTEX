@@ -4,8 +4,155 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Users</title>
+
+  <!-- AdminLTE CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles/privateStyles.css">
 </head>
-<body>
-  
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <a href="#" class="brand-link">
+        <img src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+        <span class="brand-text font-weight-light">Admin Dashboard</span>
+      </a>
+
+      <div class="sidebar">
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="/dashboard" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/manage-users" class="nav-link active">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Manage Users</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/manage-events" class="nav-link">
+                <i class="nav-icon fas fa-calendar-alt"></i>
+                <p>Manage Events</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/create-users" class="nav-link">
+                <i class="nav-icon fas fa-user-plus"></i>
+                <p>Create Users</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/logout" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>Logout</p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="content-wrapper">
+      <section class="content">
+        <div class="container-fluid">
+          <h1 class="my-4">Manage Users</h1>
+          <table class="table table-bordered table-striped">
+            <caption>List of Registered Users</caption>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City</th>
+                <th>County</th>
+                <th>State</th>
+                <th>Distance Preference</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Admin</th>
+                <th>Sewing Level</th>
+                <th>Sew Teach</th>
+                <th>Lead Events</th>
+                <th>Join Date</th>
+                <th>Housing Type</th>
+                <th>Other Description</th>
+                <th>Expected Hours</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (users && users.length > 0) { %>
+                <% users.forEach(user => { %>
+                  <tr>
+                    <td><%= user.volid %></td>
+                    <td><%= user.volfirst %></td>
+                    <td><%= user.vollast %></td>
+                    <td><%= user.volcity %></td>
+                    <td><%= user.volcounty %></td>
+                    <td><%= user.volstate %></td>
+                    <td><%= user.distancepref %></td>
+                    <td><%= user.volemail %></td>
+                    <td>********</td>
+                    <td><%= user.admin ? 'Yes' : 'No' %></td>
+                    <td><%= user.sewlevel %></td>
+                    <td><%= user.sewteach ? 'Yes' : 'No' %></td>
+                    <td><%= user.leadev ? 'Yes' : 'No' %></td>
+                    <td><%= user.voljoindate %></td>
+                    <td><%= user.htype %></td>
+                    <td><%= user.otherdesc %></td>
+                    <td><%= user.volexpectedhrs %></td>
+                    <td>
+                      <!-- Delete button with confirmation -->
+                      <form action="/delete-user/<%= user.id %>" method="POST" style="display:inline;" onsubmit="return confirmAction('delete')">
+                        <button type="submit">Delete</button>
+                      </form>
+                      <!-- Edit link with confirmation -->
+                      <a href="/edit-user/<%= user.volid %>" onclick="return confirmAction('edit')">Edit</a>
+ | 
+                    </td>
+                  </tr>
+                <% }) %>
+              <% } else { %>
+                <tr><td colspan="18">No users found.</td></tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+  <script>
+    function editUser(userId) {
+      alert('Edit functionality not implemented yet for User ID: ' + userId);
+    }
+  </script>
+
+  <script>
+    // Confirmation dialog for Edit and Delete actions
+    function confirmAction(action) {
+        let message = '';
+        if (action === 'edit') {
+            message = 'Are you sure you want to edit this user?';
+        } else if (action === 'delete') {
+            message = 'Are you sure you want to delete this user? This action cannot be undone.';
+        }
+
+        // Display confirmation dialog
+        return confirm(message);
+    }
+  </script>
 </body>
 </html>

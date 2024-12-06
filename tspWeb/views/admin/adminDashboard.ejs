@@ -8,8 +8,46 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="/styles.css">
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+        }
+
+        .main-sidebar {
+            height: 100vh;
+            position: fixed;
+        }
+
+        .content-wrapper {
+            margin-left: 250px; /* Match sidebar width */
+            padding: 20px;
+            flex: 1;
+            overflow: auto;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        #calendar {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .tableauPlaceholder {
+            width: 100%;
+            height: 500px; /* Adjust height as needed */
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -23,7 +61,6 @@
 
             <!-- Sidebar -->
             <div class="sidebar">
-                <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
@@ -38,21 +75,18 @@
                                 <p>Manage Users</p>
                             </a>
                         </li>
-                        
                         <li class="nav-item">
                             <a href="/manage-events" class="nav-link">
                                 <i class="nav-icon fas fa-calendar-alt"></i>
                                 <p>Manage Events</p>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a href="/create-users" class="nav-link">
                                 <i class="nav-icon fas fa-user-plus"></i>
                                 <p>Create Users</p>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a href="/logout" class="nav-link">
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -61,80 +95,116 @@
                         </li>
                     </ul>
                 </nav>
-                <!-- /.sidebar-menu -->
             </div>
-            <!-- /.sidebar -->
         </aside>
 
         <!-- Content Wrapper -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
+            <!-- Content Header -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0">Admin Dashboard</h1>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Main content -->
+            <!-- Main Content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- Info boxes -->
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Users</span>
-                                    <span class="info-box-number">
-                                        150
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dashboard content here -->
+                    <!-- Calendar Section -->
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Recent Activity</h3>
+                                    <h3 class="card-title">Event Calendar</h3>
                                 </div>
                                 <div class="card-body">
-                                    <p>Display recent activity logs or any other content relevant to the admin.</p>
+                                    <div id="calendar"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Links to the newly added pages -->
+                    <!-- Dashboard Section -->
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Admin Actions</h3>
+                                    <h3 class="card-title">Dashboard Insights</h3>
                                 </div>
                                 <div class="card-body">
-                                    <ul>
-                                        <li><a href="/create-users">Create a new user</a></li>
-                                        <li><a href="/manage-users">Manage existing users</a></li>
-                                        <li><a href="/manage-events">Manage events</a></li>
-                                    </ul>
+                                    <div class="tableauPlaceholder" id="viz1733462800092" style="position: relative">
+                                        <noscript>
+                                            <a href="#"><img alt="AdminDashboard" src="https://public.tableau.com/static/images/Ad/AdminDashboard_17334627783150/AdminDashboard/1_rss.png" style="border: none;" /></a>
+                                        </noscript>
+                                        <object class="tableauViz" style="display: none;">
+                                            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+                                            <param name="embed_code_version" value="3" />
+                                            <param name="name" value="AdminDashboard_17334627783150/AdminDashboard" />
+                                            <param name="tabs" value="no" />
+                                            <param name="toolbar" value="yes" />
+                                            <param name="static_image" value="https://public.tableau.com/static/images/Ad/AdminDashboard_17334627783150/AdminDashboard/1.png" />
+                                            <param name="animate_transition" value="yes" />
+                                            <param name="display_static_image" value="yes" />
+                                            <param name="display_spinner" value="yes" />
+                                            <param name="display_overlay" value="yes" />
+                                            <param name="display_count" value="yes" />
+                                            <param name="language" value="en-US" />
+                                            <param name="filter" value="publish=yes" />
+                                        </object>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div><!-- /.container-fluid -->
-            </section><!-- /.content -->
-        </div><!-- /.content-wrapper -->
-    </div><!-- /.wrapper -->
+                </div>
+            </section>
+        </div>
+    </div>
 
-    <!-- AdminLTE Scripts -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: [
+                    { title: 'Team Meeting', start: '2024-12-06' },
+                    { title: 'Conference', start: '2024-12-10', end: '2024-12-12' }
+                ],
+                dateClick: function(info) {
+                    const eventTitle = prompt("Enter Event Title:");
+                    if (eventTitle) {
+                        calendar.addEvent({ title: eventTitle, start: info.dateStr });
+                    }
+                },
+                eventClick: function(info) {
+                    if (confirm(`Delete event '${info.event.title}'?`)) {
+                        info.event.remove();
+                    }
+                }
+            });
+            calendar.render();
+
+            // Tableau Embed Script
+            const divElement = document.getElementById('viz1733462800092');
+            const vizElement = divElement.getElementsByTagName('object')[0];
+            if (divElement.offsetWidth > 800) {
+                vizElement.style.width = '1000px';
+                vizElement.style.height = '827px';
+            } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '977px';
+            }
+            const scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        });
+    </script>
 </body>
 </html>

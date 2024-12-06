@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express'); 
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
@@ -6,7 +6,18 @@ const path = require('path'); // Import path module
 const router = express.Router();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+const knex = require("knex")({
+    client: "pg",
+    connection: {
+        host : "localhost",
+        user : "postgres",
+        password : "ItisIStime2024!",
+        database : "turtleDB",
+        port : 5432
+    }
+});  
 
 // Sample users (In production, this would come from a database)
 const users = [
@@ -22,32 +33,13 @@ const users = [
     }
 ];
 
-const { Pool } = require('pg'); // PostgreSQL client
-
-// PostgreSQL Database Configuration
-const db = new Pool({
-    user: 'postgres',      // Replace with your PostgreSQL username
-    host: 'localhost',          // Replace with your PostgreSQL host
-    database: 'intex3',  // Replace with your PostgreSQL database name
-    password: '0000',  // Replace with your PostgreSQL password
-    port: 5432,                 // Default PostgreSQL port
-});
-
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); // Explicitly set views path
 app.use(express.static('public'));
-// Serve static files from 'styles' and 'assets'
-app.use(express.static(path.join(__dirname, 'styles')));
-app.use(express.static(path.join(__dirname, 'assets')));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/styles', express.static(path.join(__dirname, 'styles'))); // to use the CSS files
 app.use('/assets', express.static(path.join(__dirname, 'assets')));// to use the assets folder
-
-
-
-
 
 // Configure session
 app.use(session({
@@ -56,31 +48,12 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
-app.get('/api/stats', (req, res) => {
-    // Replace these values with actual data
-    const stats = {
-        vestsMade: 120,
-        donatedAmount: 5000
-    };
-    res.json(stats);  // Send data as JSON response
-});
-
-
-
-
-
-
-
 // Root Route
 app.get('/', (req, res) => {
     res.render('public/welcome', { user: req.session.user || {}, currentPage: 'home' });
 });
 
-
-
-
-// // Routes for other pages that are publicly accessible
+// Routes for other pages that are publicly accessible
 // Route for request an event page
 app.get('/event-request', (req, res) => {
     res.render('public/eventRequest', { currentPage: 'eventRequest' });
@@ -101,11 +74,7 @@ app.get('/contact-us', (req, res) => {
     res.render('public/contactUs', { currentPage: 'contactUs' });
 });
 
-
-
-
-
-// // Security Routes
+// Security Routes
 // Route to display login page
 app.get('/login', (req, res) => {
     // Render login page and pass any error message
@@ -138,36 +107,80 @@ app.post('/login', (req, res) => {
     res.redirect('/dashboard');
 });
 
-
-
-
-// // Routes for pages secured by admin access only
+// Routes for pages secured by admin access only
 // Admin Dashboard route
 app.get('/dashboard', isAdmin, (req, res) => {
     res.render('admin/adminDashboard', { user: req.session.user || {} });
 });
 
-/// Admin routes for managing users
-app.get('/manage-users', isAdmin, (req, res) => {
-    // The users array should be fetched from your database in a real app
-    const userList = [
-        { id: 1, username: 'admin', role: 'admin' },
-        { id: 2, username: 'user1', role: 'authorizedUser' },
-    ];
+// View all users (Manage Users)
+app.get('/manage-users', async (req, res) => {
+    try {
+        const userList = [
+            { id: 1, username: 'admin', role: 'admin' },
+            { id: 2, username: 'user1', role: 'authorizedUser' },
+        ];
 
-    res.render('admin/manageUsers', { user: req.session.user, users: userList });
+        const users = await knex('volunteer').select('*'); // Fetch users from the 'volunteer' table
+        
+        const mergedUsers = userList.concat(users);  // Combine both arrays (or use just users if ready)
+
+        res.render('admin/manageUsers', { users: mergedUsers }); 
+    } catch (err) {
+        console.error('Error fetching users:', err);
+        res.status(500).send('Error fetching users');
+    }
 });
 
-// Route for deleting a user
-app.get('/delete-user/:id', isAdmin, (req, res) => {
-    const userId = req.params.id;
-    // Delete the user by ID from the database (or mock the delete operation)
-    // For now, just redirect back to manage users
-    res.redirect('/manage-users');
+// Get user details for editing
+app.get('/edit-user/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await knex('volunteer').where({ volid: id }).first(); // Fetch user by ID
+        if (user) {
+            res.render('admin/editUser', { user }); // Pass user data to edit form
+        } else {
+            res.status(404).send('User not found');
+        }
+    } catch (err) {
+        console.error('Error fetching user for edit:', err);
+        res.status(500).send('Error fetching user for edit');
+    }
 });
 
+// Update user data (Post from the edit form)
+app.post('/update-user/:id', async (req, res) => {
+    const { id } = req.params;
+    const { volfirst, vollast, volcity, volcounty, volstate, distancepref, volemail, password, sewlevel, admin, sewteach, leadev, htype, otherdesc, volexpectedhrs } = req.body;
 
+    const hashedPassword = password ? bcrypt.hashSync(password, 10) : undefined;
 
+    const updatedUser = {
+        volfirst, vollast, volcity, volcounty, volstate, distancepref, volemail, sewlevel, admin, sewteach, leadev, htype, otherdesc, volexpectedhrs
+    };
+    
+    if (hashedPassword) updatedUser.password = hashedPassword;
+
+    try {
+        await knex('volunteer').where({ volid: id }).update(updatedUser); // Update user in database
+        res.redirect('/manage-users'); // Redirect to manage users page after updating
+    } catch (err) {
+        console.error('Error updating user:', err);
+        res.status(500).send('Error updating user');
+    }
+});
+
+// Delete user
+app.post('/delete-user/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await knex('volunteer').where({ volid: id }).del(); // Delete user from database
+        res.redirect('/manage-users'); // Redirect to manage users page after deletion
+    } catch (err) {
+        console.error('Error deleting user:', err);
+        res.status(500).send('Error deleting user');
+    }
+});
 
 // Admin routes for creating users
 app.get('/create-users', isAdmin, (req, res) => {
@@ -178,8 +191,6 @@ app.post('/create-users', isAdmin, (req, res) => {
     const { username, password, role } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    // Here you would insert the new user into your database.
-    // For now, we are adding them to the users array:
     users.push({ username, password: hashedPassword, role });
 
     res.redirect('/manage-users'); // Redirect to manage users after creation
@@ -188,95 +199,33 @@ app.post('/create-users', isAdmin, (req, res) => {
 // Route to check if the username exists
 router.get('/check-username', async (req, res) => {
     const { username } = req.query;
-  
-    try {
-      const result = await db.query('SELECT COUNT(*) FROM users WHERE username = $1', [username]);
-      const usernameTaken = result.rows[0].count > 0;
-  
-      res.json({ exists: usernameTaken });
-    } catch (err) {
-      console.error('Error checking username availability:', err);
-      res.status(500).json({ exists: false });
-    }
-  });
-  
-  // Your other routes, like for creating users
-  router.post('/create-users', async (req, res) => {
-    // Your logic for creating a new user
-  });
-  
-  module.exports = router;
 
-// GET /manage-events: List all events
+    try {
+        const result = await db.query('SELECT COUNT(*) FROM users WHERE username = $1', [username]);
+        const usernameTaken = result.rows[0].count > 0;
+
+        res.json({ exists: usernameTaken });
+    } catch (err) {
+        console.error('Error checking username availability:', err);
+        res.status(500).json({ exists: false });
+    }
+});
+
+// Your other routes, like for creating users
+router.post('/create-users', async (req, res) => {
+    // Your logic for creating a new user
+});
+
+// Admin routes for managing events
 app.get('/manage-events', isAdmin, async (req, res) => {
     try {
-        const result = await db.query('SELECT * FROM event ORDER BY evdate ASC');
-        res.render('admin/manageEvents', { user: req.session.user, events: result.rows });
+        // Fetch all events from the 'event' table
+        const events = await knex('event').select('*').orderBy('evdate', 'asc'); // Sort by event date
+        // Render the 'manageEvents' template and pass the events
+        res.render('admin/manageEvents', { user: req.session.user, events });
     } catch (err) {
         console.error('Error fetching events:', err);
-        res.status(500).send('Database error');
-    }
-});
-
-
-// GET /edit-event/:id: Render edit event page
-app.get('/edit-event/:id', isAdmin, async (req, res) => {
-    const { id } = req.params;
-    try {
-        const result = await db.query('SELECT * FROM event WHERE evid = $1', [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).send('Event not found');
-        }
-        res.render('admin/editEvents', { user: req.session.user, event: result.rows[0] });
-    } catch (err) {
-        console.error('Error fetching event:', err);
-        res.status(500).send('Database error');
-    }
-});
-
-// POST /edit-event/:id: Update an event
-app.post('/edit-event/:id', isAdmin, async (req, res) => {
-    const { id } = req.params;
-    const {
-        evname, evdesc, jenstory, donate, donamount, organization, evpoc,
-        evemail, evphone, evstreet, evcity, evstate, evzip, roomsize,
-        tabletype, evdate, evstart, evend, evhrs, evtype, evexpected,
-        evactual, evsewex, evsewact, status, nummachine
-    } = req.body;
-
-    try {
-        await db.query(
-            `UPDATE event SET
-                evname = $1, evdesc = $2, jenstory = $3, donate = $4, donamount = $5,
-                organization = $6, evpoc = $7, evemail = $8, evphone = $9, evstreet = $10,
-                evcity = $11, evstate = $12, evzip = $13, roomsize = $14, tabletype = $15,
-                evdate = $16, evstart = $17, evend = $18, evhrs = $19, evtype = $20,
-                evexpected = $21, evactual = $22, evsewex = $23, evsewact = $24, status = $25,
-                nummachine = $26
-            WHERE evid = $27`,
-            [
-                evname, evdesc, jenstory === 'on', donate === 'on', donamount || 0, organization, evpoc,
-                evemail, evphone, evstreet, evcity, evstate, evzip, roomsize,
-                tabletype, evdate, evstart, evend, evhrs || 0, evtype, evexpected || 0,
-                evactual || 0, evsewex || 0, evsewact || 0, status, nummachine || 0, id
-            ]
-        );
-        res.redirect('/manage-events');
-    } catch (err) {
-        console.error('Error updating event:', err);
-        res.status(500).send('Database error');
-    }
-});
-
-// GET /delete-event/:id: Delete an event
-app.get('/delete-event/:id', isAdmin, async (req, res) => {
-    const { id } = req.params;
-    try {
-        await db.query('DELETE FROM event WHERE evid = $1', [id]);
-        res.redirect('/manage-events');
-    } catch (err) {
-        console.error('Error deleting event:', err);
-        res.status(500).send('Database error');
+        res.status(500).send('Database error while fetching events');
     }
 });
 
@@ -290,9 +239,6 @@ app.get('/logout', (req, res) => {
         res.redirect('/login'); // Redirect to login page after logout
     });
 });
-
-
-
 
 // Start the server
 app.listen(port, () => {

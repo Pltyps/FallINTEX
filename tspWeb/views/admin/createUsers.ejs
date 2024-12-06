@@ -1,115 +1,152 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create User Account</title>
+
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-        .requirement {
-            font-size: 14px;
-            color: #dc3545; /* red (not fulfilled) */
-        }
-        .requirement.fulfilled {
-            color: #28a745; /* green (fulfilled) */
-        }
-    </style>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/privateStyles.css">
 </head>
-<body>
-    <div class="container mt-5">
-        <h1>Create User Account</h1>
-        <form action="/create-user" method="POST" id="create-user-form">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="first-name">First Name</label>
-                    <input type="text" class="form-control" id="first-name" name="firstName" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" class="form-control" id="last-name" name="lastName" required>
-                </div>
-            </div>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-link">
+                <img src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+                <span class="brand-text font-weight-light">Admin Dashboard</span>
+            </a>
 
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-                <small id="username-error" class="form-text text-danger" style="display:none;">Username is already taken.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-                <div id="password-requirements">
-                    <ul>
-                        <li class="requirement" id="min-length">At least 12 characters long</li>
-                        <li class="requirement" id="uppercase">Includes both uppercase and lowercase letters</li>
-                        <li class="requirement" id="number">Includes at least one number</li>
-                        <li class="requirement" id="special-char">Includes at least one special symbol (e.g., !@#$%^&*)</li>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a href="/dashboard" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/manage-users" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Manage Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/manage-events" class="nav-link">
+                                <i class="nav-icon fas fa-calendar-alt"></i>
+                                <p>Manage Events</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/create-users" class="nav-link">
+                                <i class="nav-icon fas fa-user-plus"></i>
+                                <p>Create Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/logout" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
                     </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid d-flex align-items-center" style="min-height: 100vh;">
+                    <div class="row w-100">
+                        <!-- Form Container -->
+                        <div class="col-md-8 offset-md-2 mt-5">
+                            <h1>Create User Account</h1>
+                            <form action="/create-user" method="POST" id="create-user-form">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="first-name">First Name</label>
+                                        <input type="text" class="form-control" id="first-name" name="firstName" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="last-name">Last Name</label>
+                                        <input type="text" class="form-control" id="last-name" name="lastName" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                    <small id="username-error" class="form-text text-danger" style="display:none;">Username is already taken.</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <div id="password-requirements">
+                                        <ul>
+                                            <li class="requirement" id="min-length">At least 12 characters long</li>
+                                            <li class="requirement" id="uppercase">Includes both uppercase and lowercase letters</li>
+                                            <li class="requirement" id="number">Includes at least one number</li>
+                                            <li class="requirement" id="special-char">Includes at least one special symbol (e.g., !@#$%^&*)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="confirm-password">Confirm Password</label>
+                                    <input type="password" class="form-control" id="confirm-password" name="confirmPassword" required>
+                                    <small id="password-match-error" class="form-text text-danger" style="display:none;">Passwords do not match.</small>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm-password" name="confirmPassword" required>
-                <small id="password-match-error" class="form-text text-danger" style="display:none;">Passwords do not match.</small>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-block">Create Account</button>
-        </form>
+            </section>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
     <script>
-        // Password requirements check
         function checkPasswordRequirements(password) {
             const minLength = document.getElementById('min-length');
             const uppercase = document.getElementById('uppercase');
             const number = document.getElementById('number');
             const specialChar = document.getElementById('special-char');
             
-            // Check length
-            if (password.length >= 12) {
-                minLength.classList.add('fulfilled');
-            } else {
-                minLength.classList.remove('fulfilled');
-            }
+            if (password.length >= 12) minLength.classList.add('fulfilled');
+            else minLength.classList.remove('fulfilled');
 
-            // Check for uppercase and lowercase letters
-            if (/[A-Z]/.test(password) && /[a-z]/.test(password)) {
-                uppercase.classList.add('fulfilled');
-            } else {
-                uppercase.classList.remove('fulfilled');
-            }
+            if (/[A-Z]/.test(password) && /[a-z]/.test(password)) uppercase.classList.add('fulfilled');
+            else uppercase.classList.remove('fulfilled');
 
-            // Check for numbers
-            if (/\d/.test(password)) {
-                number.classList.add('fulfilled');
-            } else {
-                number.classList.remove('fulfilled');
-            }
+            if (/\d/.test(password)) number.classList.add('fulfilled');
+            else number.classList.remove('fulfilled');
 
-            // Check for special characters
-            if (/[^A-Za-z0-9]/.test(password)) {
-                specialChar.classList.add('fulfilled');
-            } else {
-                specialChar.classList.remove('fulfilled');
-            }
+            if (/[^A-Za-z0-9]/.test(password)) specialChar.classList.add('fulfilled');
+            else specialChar.classList.remove('fulfilled');
         }
 
-        // Event listener for password field
         document.getElementById('password').addEventListener('input', function() {
             checkPasswordRequirements(this.value);
         });
 
-        // Check if username exists
         function checkUsernameAvailability(username) {
             const usernameError = document.getElementById('username-error');
-            // Mock existing usernames (replace with actual DB query when available)
             const existingUsernames = ['admin', 'user1'];
-
             if (existingUsernames.includes(username)) {
                 usernameError.style.display = 'inline';
                 return false;
@@ -119,25 +156,21 @@
             }
         }
 
-        // Event listener for username field
         document.getElementById('username').addEventListener('input', function() {
             checkUsernameAvailability(this.value);
         });
 
-        // Form submission handling
         document.getElementById('create-user-form').addEventListener('submit', function(event) {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
             const username = document.getElementById('username').value;
 
-            // Check password match
             if (password !== confirmPassword) {
                 event.preventDefault();
                 document.getElementById('password-match-error').style.display = 'inline';
                 return;
             }
 
-            // Check if username is available
             if (!checkUsernameAvailability(username)) {
                 event.preventDefault();
                 return;

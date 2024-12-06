@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="/styles/style.css"> <!-- Link to your CSS -->
+</head>
+<body>
+
+<h2>Edit User: <%= user.volfirst %> <%= user.vollast %></h2>
+
+<form action="/update-user/<%= user.volid %>" method="POST">
+    <div>
+        <label for="volfirst">First Name</label>
+        <input type="text" id="volfirst" name="volfirst" value="<%= user.volfirst %>" required>
+    </div>
+
+    <div>
+        <label for="vollast">Last Name</label>
+        <input type="text" id="vollast" name="vollast" value="<%= user.vollast %>" required>
+    </div>
+
+    <div>
+        <label for="volcity">City</label>
+        <input type="text" id="volcity" name="volcity" value="<%= user.volcity %>" required>
+    </div>
+
+    <div>
+        <label for="volemail">Email</label>
+        <input type="email" id="volemail" name="volemail" value="<%= user.volemail %>" required>
+    </div>
+
+    <div>
+        <label for="sewlevel">Sewing Level</label>
+        <select id="sewlevel" name="sewlevel">
+            <option value="1" <%= user.sewlevel == 1 ? 'selected' : '' %>>Beginner</option>
+            <option value="2" <%= user.sewlevel == 2 ? 'selected' : '' %>>Intermediate</option>
+            <option value="3" <%= user.sewlevel == 3 ? 'selected' : '' %>>Advanced</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="admin">Admin Role</label>
+        <input type="checkbox" id="admin" name="admin" <%= user.admin ? 'checked' : '' %>> Admin
+    </div>
+
+    <div>
+        <label for="password">New Password (Leave blank to keep current password)</label>
+        <input type="password" id="password" name="password">
+    </div>
+
+    <div>
+        <label for="volstate">State</label>
+        <input type="text" id="volstate" name="volstate" value="<%= user.volstate %>" required>
+    </div>
+
+    <div>
+        <label for="otherdesc">Other Description</label>
+        <textarea id="otherdesc" name="otherdesc"><%= user.otherdesc %></textarea>
+    </div>
+
+    <div>
+        <label for="volexpectedhrs">Expected Hours</label>
+        <input type="number" id="volexpectedhrs" name="volexpectedhrs" value="<%= user.volexpectedhrs %>" required>
+    </div>
+
+    <button type="submit">Update User</button>
+</form>
+
+<a href="/manage-users">Back to Manage Users</a>
+
+<script src="/scripts/confirm.js"></script> <!-- Include confirmation script -->
+</body>
+</html>

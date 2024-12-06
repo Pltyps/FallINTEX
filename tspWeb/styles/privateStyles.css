@@ -1,0 +1,13 @@
+#calendar {
+    max-width: 80%;
+    width: 80%;
+    min-height: 35px; /* Adjust the minimum height as needed */
+}
+
+.requirement {
+    font-size: 14px;
+    color: #dc3545; /* red (not fulfilled) */
+}
+.requirement.fulfilled {
+    color: #28a745; /* green (fulfilled) */
+}
