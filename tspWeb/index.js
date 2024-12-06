@@ -22,7 +22,16 @@ const users = [
     }
 ];
 
+const { Pool } = require('pg'); // PostgreSQL client
 
+// PostgreSQL Database Configuration
+const db = new Pool({
+    user: 'postgres',      // Replace with your PostgreSQL username
+    host: 'localhost',          // Replace with your PostgreSQL host
+    database: 'intex3',  // Replace with your PostgreSQL database name
+    password: '0000',  // Replace with your PostgreSQL password
+    port: 5432,                 // Default PostgreSQL port
+});
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -198,15 +207,78 @@ router.get('/check-username', async (req, res) => {
   
   module.exports = router;
 
-
-
-
-// Admin routes for managing events
-app.get('/manage-events', isAdmin, (req, res) => {
-    // Render the manage events page
-    res.render('admin/manageEvents', { user: req.session.user });
+// GET /manage-events: List all events
+app.get('/manage-events', isAdmin, async (req, res) => {
+    try {
+        const result = await db.query('SELECT * FROM event ORDER BY evdate ASC');
+        res.render('admin/manageEvents', { user: req.session.user, events: result.rows });
+    } catch (err) {
+        console.error('Error fetching events:', err);
+        res.status(500).send('Database error');
+    }
 });
 
+
+// GET /edit-event/:id: Render edit event page
+app.get('/edit-event/:id', isAdmin, async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await db.query('SELECT * FROM event WHERE evid = $1', [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).send('Event not found');
+        }
+        res.render('admin/editEvents', { user: req.session.user, event: result.rows[0] });
+    } catch (err) {
+        console.error('Error fetching event:', err);
+        res.status(500).send('Database error');
+    }
+});
+
+// POST /edit-event/:id: Update an event
+app.post('/edit-event/:id', isAdmin, async (req, res) => {
+    const { id } = req.params;
+    const {
+        evname, evdesc, jenstory, donate, donamount, organization, evpoc,
+        evemail, evphone, evstreet, evcity, evstate, evzip, roomsize,
+        tabletype, evdate, evstart, evend, evhrs, evtype, evexpected,
+        evactual, evsewex, evsewact, status, nummachine
+    } = req.body;
+
+    try {
+        await db.query(
+            `UPDATE event SET
+                evname = $1, evdesc = $2, jenstory = $3, donate = $4, donamount = $5,
+                organization = $6, evpoc = $7, evemail = $8, evphone = $9, evstreet = $10,
+                evcity = $11, evstate = $12, evzip = $13, roomsize = $14, tabletype = $15,
+                evdate = $16, evstart = $17, evend = $18, evhrs = $19, evtype = $20,
+                evexpected = $21, evactual = $22, evsewex = $23, evsewact = $24, status = $25,
+                nummachine = $26
+            WHERE evid = $27`,
+            [
+                evname, evdesc, jenstory === 'on', donate === 'on', donamount || 0, organization, evpoc,
+                evemail, evphone, evstreet, evcity, evstate, evzip, roomsize,
+                tabletype, evdate, evstart, evend, evhrs || 0, evtype, evexpected || 0,
+                evactual || 0, evsewex || 0, evsewact || 0, status, nummachine || 0, id
+            ]
+        );
+        res.redirect('/manage-events');
+    } catch (err) {
+        console.error('Error updating event:', err);
+        res.status(500).send('Database error');
+    }
+});
+
+// GET /delete-event/:id: Delete an event
+app.get('/delete-event/:id', isAdmin, async (req, res) => {
+    const { id } = req.params;
+    try {
+        await db.query('DELETE FROM event WHERE evid = $1', [id]);
+        res.redirect('/manage-events');
+    } catch (err) {
+        console.error('Error deleting event:', err);
+        res.status(500).send('Database error');
+    }
+});
 
 
 // Logout route
