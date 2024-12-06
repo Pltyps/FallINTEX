@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Events</title>
+    <style>
+        /* Gallery Section - Adjusting the top margin */
+        #gallery {
+            margin-top: 8vh;
+        }
+    </style>
+   
+    <!-- External CSS -->
+   <link rel="stylesheet" href="styles/publicStyles.css">
+
+   <!-- Fonts -->
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans+Narrow|Proxima+Nova&display=swap" rel="stylesheet">
+   
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">Turtle Shelter Project</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'past-events' ? 'active' : '' %>" href="/past-events">Past Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'event-request' ? 'active' : '' %>" href="/event-request">Event Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'volunteer-signup' ? 'active' : '' %>" href="/join-us">Join Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'contact-us' ? 'active' : '' %>" href="/contact-us">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Image Gallery Section -->
+    <section id="gallery" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Past Event Gallery</h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                <!-- Image 1 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_1.jpg" class="card-img-top" alt="Event 1">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 2 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_2.jpg" class="card-img-top" alt="Event 2">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 3 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_3.jpg" class="card-img-top" alt="Event 3">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 4 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_4.jpg" class="card-img-top" alt="Event 4">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 5 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_5.jpg" class="card-img-top" alt="Event 5">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 6 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_6.jpg" class="card-img-top" alt="Event 6">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 7 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_7.jpg" class="card-img-top" alt="Event 7">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 8 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_8.jpg" class="card-img-top" alt="Event 8">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 9 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_9.jpg" class="card-img-top" alt="Event 9">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 10 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_10.jpg" class="card-img-top" alt="Event 10">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 11 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_11.jpg" class="card-img-top" alt="Event 11">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 12 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_12.jpg" class="card-img-top" alt="Event 12">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 13 -->
+                <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_13.jpg" class="card-img-top" alt="Event 13">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Container for images. Copy, paste, and change the lik for the img src, and text-->
+                <!-- Image ?? -->
+                <!-- <div class="col">
+                    <div class="card polaroid">
+                        <img src="assets/img/pastEvents/event_img_13.jpg" class="card-img-top" alt="Event 13">
+                        <div class="card-body">
+                            <p class="card-text">Your Event Text Here</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="text-center py-4">
+        <div class="container">
+            <p>
+                <a href="#page-top" class="footer-link">© Turtle Shelter Project 2024. All Rights Reserved.</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+
+</body>
+</html>

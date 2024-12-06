@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turtle Shelter Project</title>
+    
+    <!-- Embedded CSS -->
+    <style>
+        /* Header Section */
+        .masthead {
+            background: url('assets/img/welcomeBanner.jpg') no-repeat center center;
+            background-size: cover;
+            height: 80vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 10vh; /* Adjust based on viewport height */
+            margin-bottom: 16vh; /* Add bottom margin to create space */
+        }
+
+        .masthead h1 {
+            position: absolute;
+            bottom: -25%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'PT Sans Narrow', sans-serif;
+            font-weight: 700;
+            color: #000000;
+            padding: 1em 2vw;
+            font-size: 3.5vw;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /* Tableau container*/
+        /* Centering the Tableau chart */
+        .tableau-container {
+            display: flex;
+            justify-content: center;  /* Center horizontally */
+            align-items: center;      /* Center vertically */
+            height: 100%;             /* Ensures the container takes full height */
+            max-width: 100%;          /* Prevents it from going beyond the container */
+            margin: 0 auto;           /* Auto margin for centering */
+        }
+
+
+        .tableauPlaceholder object {
+            max-width: 100%; /* Ensures responsiveness */
+            margin: 0 auto; /* Centers the content */
+        }
+    </style>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles/publicStyles.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans+Narrow|Proxima+Nova&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">Turtle Shelter Project</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'past-events' ? 'active' : '' %>" href="/past-events">Past Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'event-request' ? 'active' : '' %>" href="/event-request">Event Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'volunteer-signup' ? 'active' : '' %>" href="/join-us">Join Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= currentPage === 'contact-us' ? 'active' : '' %>" href="/contact-us">Contact Us</a>
+                    </li>
+                </ul>
+                <a href="/login" class="sign-in-btn ms-lg-2">Sign In</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Header Section -->
+    <header class="masthead text-center py-5">
+        <div class="container">
+            <h1 class="display-4 impact-font">YOU CAN CHANGE THEIR LIVES</h1>
+        </div>
+    </header>
+
+
+    <!-- Our Mission -->
+    <section class="container mt-5 bg-light">
+        <h1 class="title">OUR MISSION</h1>
+        <div class="statement-line1"></div>
+        <br>
+        <p>To provide life-saving, portable vests that keep our homeless neighbors warm in extreme cold, protecting them from freezing to death.</p>
+    </section>
+
+    <!-- Our Story -->
+    <section class="container mt-5 bg-light">
+        <h1 class="title">OUR STORY</h1>
+        <div class="statement-line2"></div>
+        <br>
+        <p>
+            Many homeless individuals face life-threatening risks like hypothermia and frostbite during winter due to inadequate shelter access and poorly constructed cold-weather response plans. 
+            Jen, once homeless herself, experienced these dangers firsthand and tragically lost seven friends to freezing temperatures. 
+            Determined to help, she launched the Turtle Shelter Project in 2017 with Angela Roth.
+            Using Jim Phillips' foam clothing technology, they designed affordable, high-tech foam vests that retain warmth even when wet and keep wearers warm in temperatures as low as -10°F. 
+            These portable and durable Turtle Shelters provide life-saving insulation for those without access to shelters. 
+            Communities can request these vests or rally groups—friends, businesses, churches, or clubs—to make and distribute them. 
+            Together, we can fight the cold, save lives, and offer hope to those in need.
+        </p>
+    </section>
+
+
+   <!-- "Our Efforts" Section with Live Counter Tiles -->
+    <section class="container mt-5 bg-light">
+        <h1 class="title">OUR EFFORTS</h1>
+        <div class="statement-line3"></div>
+        <div class="our-efforts">
+            <div class="counter-tile">
+                <p id="vests-count" class="counter-number">0</p>
+                <h3 class="counter-label">Vests Made</h3>
+            </div>
+            <div class="counter-tile">
+                <p id="donated-amount" class="counter-number">$0</p>
+                <h3 class="counter-label">Donated</h3>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Tableau -->
+    <section class="container mt-5 bg-light">
+        <h1 class="title">Homeless across the United States</h1>
+        <div class="statement-line4"></div>
+        <br>
+        <p>Adjust the filters to view the extent of homelessness in your State.</p>
+        <div class='tableauPlaceholder' id='viz1733437705456'>
+            <noscript>
+                <a href='#'>
+                    <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Us&#47;UserDashboard_17334375915650&#47;UserDashboard&#47;1_rss.png' style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz'  style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                <param name='embed_code_version' value='3' /> 
+                <param name='site_root' value='' />
+                <param name='name' value='UserDashboard_17334375915650&#47;UserDashboard' />
+                <param name='tabs' value='yes' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Us&#47;UserDashboard_17334375915650&#47;UserDashboard&#47;1.png' /> 
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+                <param name='filter' value='publish=yes' />
+            </object>
+        </div>                
+        <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1733437705456');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { 
+                vizElement.style.minWidth='1000px';
+                vizElement.style.maxWidth='100%';
+                vizElement.style.minHeight='850px';
+                vizElement.style.maxHeight=(divElement.offsetWidth*0.75)+'px';
+            } else if ( divElement.offsetWidth > 500 ) { 
+                vizElement.style.minWidth='1000px';
+                vizElement.style.maxWidth='100%';
+                vizElement.style.minHeight='850px';
+                vizElement.style.maxHeight=(divElement.offsetWidth*0.75)+'px';
+            } else { 
+                vizElement.style.width='100%';
+                vizElement.style.minHeight='800px';
+                vizElement.style.maxHeight=(divElement.offsetWidth*1.77)+'px';
+            }                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+        </script>
+    </section>
+
+
+    <!-- Donate Section -->
+    <section class="container mt-5 bg-light py-5">
+        <h4 class="donate-description">
+            Each $50 tax-deductible donation to the Turtle Shelter Project will provide a high tech foam vest for a youth or adult experiencing homelessness. You can tell us where you would like the vest or vests sent to, or we will send them to where there is the greatest need. The Turtle Shelter Project is a 501 (c)(3) non-profit, EIN 82-1035303.
+        </h4>
+        <br><br>
+        <a class="donate-btn btn-lg" href="https://turtleshelterproject.org/checkout/donate?donatePageId=5b6a44c588251b72932df5a0" target="_blank">Donate</a>
+    </section>
+
+
+    <!-- Footer Section -->
+    <footer class="text-center py-4">
+        <div class="container">
+            <p>
+                <a href="#page-top" class="footer-link">© Turtle Shelter Project 2024. All Rights Reserved.</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- JavaScript for Dynamic Counter Updates -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Example fetching data from a server (adjust as necessary)
+        fetch('/api/stats')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('vests-count').textContent = data.vestsMade;
+                document.getElementById('donated-amount').textContent = `$${data.donatedAmount}`;
+            });
+    });
+
+    // Example update (to be replaced with actual data fetching later)
+    updateCounters(120, 5000); // Replace with actual data
+    </script>
+
+</body>
+</html>

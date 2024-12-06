@@ -1,0 +1,437 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #ffffff;
+    color: #5c3d2a;
+    scroll-behavior: smooth;
+}
+
+/* Navigation */
+.navbar {
+    background-color: rgba(245, 242, 242, 0.8);
+    font-family: 'Proxima Nova', sans-serif;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    padding-top: 2vh; /* Increase padding for better touch targets */
+    padding-bottom: 2vh; /* Increase padding for better touch targets */
+    height: auto;
+}
+
+.navbar-brand {
+    color: #77bab3;
+    font-weight: 700;
+    font-size: 2vw !important; /* Font size dynamic with screen size */
+}
+
+.navbar-brand:hover {
+    color: #f2a138;
+}
+
+/* Navigation links */
+.navbar-nav .nav-link {
+    color: #000000;
+    font-weight: 500;
+    font-size: 1.3vw; /* Increased size relative to viewport */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #77bab3;
+}
+
+/* Active link style */
+.navbar-nav .nav-link.active {
+    color: #f2a138;
+}
+
+
+/* Sign In Button */
+.sign-in-btn {
+    background-color: #77bab3;
+    color: #ffffff;
+    padding: 0.6em 1.4vw; /* Dynamic padding */
+    border: none;
+    border-radius: 0.5em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 70%; /* Move button dynamically to the right */
+    font-size: 1vw; /* Font size based on viewport */
+}
+
+.sign-in-btn:hover {
+    background-color: #f2a138;
+    color: #000000;
+}
+
+
+/* Mission Section */
+.container.mt-5 {
+    padding: 2vh 2vw; /* Dynamic padding based on viewport size */
+    background-color: #f5f2f2;
+    border-radius: 0.4em;
+    margin-top: 30vh; /* Adds spacing around the mission section */
+}
+
+/* Mission Title */
+.title {
+    color: #77bab3; /* Change the color of the heading */
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 2.5vw; /* Font size dynamically adjusts */
+    text-align: center; /* Center-align for better presentation on small screens */
+    margin-bottom: 10px;
+}
+
+/* Line below "Our Mission" */
+.statement-line1 {
+    width: 16%; /* Line length relative to container width */
+    height: 4px; /* Adjustable thickness of the line */
+    background-color: #f2a138; /* Set the color of the line */
+    margin: 0.5em auto; /* Adds space and centers the line */
+}
+
+.mission-description p {
+    margin-top: 0; /* Remove the default top margin */
+    font-size: 4vw;
+}
+
+/* Efforts Section */
+.efforts-section {
+    padding: 5vh 2vw; /* Dynamic padding based on viewport size */
+    background-color: #f5f2f2; /* Match mission content color */
+    border-radius: 0.4em;
+    margin-top: 3vh;
+}
+
+  /* Flexbox styling for the "Our Efforts" container */
+.our-efforts {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Space between tiles */
+    margin-top: 50px;
+}
+
+/* Line below "Our Efforts" */
+.statement-line2 {
+    width: 16%; /* Line length relative to container width */
+    height: 4px; /* Adjustable thickness of the line */
+    background-color: #f2a138; /* Set the color of the line */
+    margin: 0.5em auto; /* Adds space and centers the line */
+}
+
+/* Line below "Our Efforts" */
+.statement-line3 {
+    width: 16%; /* Line length relative to container width */
+    height: 4px; /* Adjustable thickness of the line */
+    background-color: #f2a138; /* Set the color of the line */
+    margin: 0.5em auto; /* Adds space and centers the line */
+}
+
+
+/* Line below Tableau Title */
+.statement-line4 {
+    width: 39%; /* Makes the line the same length as the text */
+    height: 4px; /* Adjustable thickness of the line */
+    background-color: #f2a138; /* Set the color of the line */
+    margin: 0.5em auto; /* Adds space and centers the line */
+}
+
+
+
+  /* Styling for each counter tile */
+.counter-tile {
+    background-color: #c0f0e5;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px; /* Width of the tiles */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter-tile h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.counter-tile p {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.counter-label {
+    font-size: 14px; /* Smaller size for the label text */
+    color: #000000;
+    margin-bottom: 10px; /* Space between label and number */
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.counter-number {
+    font-size: 36px; /* Larger size for the number */
+    color: #000000;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+/* Donate Button Section */
+.donate-section {
+    display: flex;
+    justify-content: center; /* Horizontally center the button */
+    align-items: center; /* Vertically center the button */
+    padding: 5vh 0; /* Add some padding for spacing */
+    background-color: #f5f2f2; /* Optional background color */
+}
+
+
+/* Donate Button */
+.donation-section {
+    text-align: center; /* Center the button within the container */
+    display: flex;
+    justify-content: center; /* Center button horizontally */
+    align-items: center; /* Vertically center the button */
+    padding: 5vh 0; /* Add some padding for spacing */
+    background-color: #f5f2f2; /* Optional background color */
+    font-size: 14px;
+}
+
+/* Adjusting the font size of the h4 element */
+.donate-description {
+    font-size: 1.3rem; /* 40% smaller than the default size */
+    color: #5c3d2a; /* Dark brown from your color palette */
+    line-height: 1.6;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.donation-section {
+    display: block;               /* Ensures it behaves like a block element */
+    width: fit-content;           /* Makes the button width fit the text */
+    margin: 20px auto 0;          /* Centers it and adds space from the text */
+    }
+
+.donate-btn {
+    display: block; /* Ensures the button is treated as a block-level element */
+    margin: 20px auto 0; /* Automatically adjust margins to center */
+    background-color: #f2a138;
+    color: #5c3d2a;
+    padding: 0.3em 2vw; /* Dynamic padding */
+    border: none;
+    border-radius: 0.5em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 2.5vw; /* Font size dynamic with screen size */
+    text-align: center; /* Center the text inside the button */
+    width: 80%; /* Button scales dynamically */
+    max-width: 300px; /* Set a maximum width */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.donate-btn:hover {
+    background-color: #5c3d2a;
+    color: #f5f2f2;
+    transform: scale(1.05);
+}
+
+/* Apply IMPACT font to header text */
+.impact-font {
+    font-family: 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
+}
+
+
+
+/* Footer */
+footer {
+    background-color: #f5f2f2;
+    color: #5c3d2a;
+    padding: 2vh 0em;
+    text-align: center;
+    font-weight: normal;
+    height: 80px;
+}
+
+footer p {
+    font-size: 1.5vw;
+}
+
+/* Footer link styling */
+.footer-link {
+    color: inherit; /* Keep the default footer text color */
+    text-decoration: none; /* Remove underline from the link */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for footer */
+.footer-link:hover {
+    color: #f2a138; /* Highlight color */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+
+/* Miscellaneous Styling */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #f2a138;
+}
+
+
+
+/* Media Queries for responsiveness */
+@media (max-width: 1024px) {
+    /* Adjust font sizes and layout for tablets */
+    .masthead h1 {
+        font-size: 8vw; /* Slightly smaller heading */
+    }
+    
+    .navbar-nav .nav-link {
+        font-size: 1.25rem; /* Slightly smaller navigation text */
+    }
+
+    .sign-in-btn, .donate-btn {
+        font-size: 2vw; /* Adjust button font size */
+    }
+}
+
+@media (max-width: 768px) {
+    .masthead {
+        margin-bottom: 10vh; /* Reduced spacing on smaller devices */
+    }
+    footer p {
+            font-size: 1rem; /* Adjust for smaller screens */
+        }
+
+    .container.mt-5 {
+        margin-top: 8vh; /* Adjust section spacing for mobile */
+        padding: 2vh 4vw; /* Adjust padding for smaller screens */
+    }
+
+    .mission-title,
+    .goal-title,
+    .tableau-title {
+        font-size: 4vw; /* Adjust title size for smaller screens */
+        margin-bottom: 1vh; /* Improve spacing for readability */
+    }
+
+    /* Adjust for tablets and mobile devices */
+    .masthead h1 {
+        font-size: 10vw; /* Smaller font size on mobile */
+    }
+
+    .statement-line1, .statement-line2, .statement-line3 {
+            width: 30%; /* Adjust line length for smaller screens */
+        }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem; /* Reduce font size for smaller screens */
+    }
+
+    .sign-in-btn, .donate-btn {
+        font-size: 2.5vw; /* Adjust button font size */
+    }
+
+    footer p {
+        font-size: 1rem; /* Adjust footer text size */
+    }
+}
+
+@media (max-width: 576px) {
+    /* Further adjust for small mobile screens */
+    .masthead h1 {
+        font-size: 12vw; /* Even smaller font size on very small screens */
+    }
+
+    .sign-in-btn, .donate-btn {
+        font-size: 3vw; /* Larger button size for easy tapping */
+    }
+}
+
+@media (max-width: 480px) {
+    .mission-title, .goal-title, .tableau-title {
+        font-size: 6vw; /* Even larger for very small screens */
+    }
+
+    .statement-line1, .statement-line2, .statement-line3 {
+        width: 40%; /* Further adjust line length */
+    }
+
+    .container.mt-5, .goals-section {
+        padding: 4vh 5vw; /* Increase padding for smaller screens */
+    }
+}
+html {
+    scroll-behavior: smooth;
+}
+
+
+
+
+/* CSS for the Past Events Page */
+/* Polaroid Card Styles */
+.polaroid {
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    border: 10px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: rotate(-5deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.polaroid:hover {
+    transform: rotate(0deg);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+}
+
+.card-body {
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    font-family: 'Patrick Hand SC', cursive;
+}
+
+.card-text {
+    font-size: 1rem;
+    font-style: italic;
+    color: #5c3d2a;
+    margin-top: 10px;
+}
+
+
+/* Button Styling for "Send Message" */
+button.btn-primary {
+    background-color: #f2a138; /* Same color as the Donate button */
+    border-color: #f2a138;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Button Hover Effect */
+button.btn-primary:hover {
+    background-color: #a14e35; /* Darker shade of the same color */
+    border-color: #a14e35;
+}
