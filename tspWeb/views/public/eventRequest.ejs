@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Request</title>
-   
+  
     <!-- External CSS -->
     <link rel="stylesheet" href="styles/publicStyles.css">
 
@@ -13,74 +13,261 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
- 
- </head>
- <body id="page-top">
-     <!-- Navigation -->
-     <nav class="navbar navbar-expand-lg fixed-top navbar-light" id="mainNav">
-         <div class="container">
-             <a class="navbar-brand" href="/">Turtle Shelter Project</a>
-             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                 <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="collapse navbar-collapse" id="navbarResponsive">
-                 <ul class="navbar-nav ms-auto">
-                     <li class="nav-item">
-                         <a class="nav-link <%= currentPage === 'past-events' ? 'active' : '' %>" href="/past-events">Past Events</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link <%= currentPage === 'event-request' ? 'active' : '' %>" href="/event-request">Event Request</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link <%= currentPage === 'volunteer-signup' ? 'active' : '' %>" href="/join-us">Join Us</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link <%= currentPage === 'contact-us' ? 'active' : '' %>" href="/contact-us">Contact Us</a>
-                     </li>
-                 </ul>
-             </div>
-         </div>
-     </nav>
+
+    <script>
+        // Function to show/hide donation amount field based on the answer to donation question
+        function toggleDonationField() {
+            var donationField = document.getElementById("donationAmount");
+            var donateYes = document.getElementById("donateYes");
+            donationField.style.display = donateYes.checked ? "block" : "none";
+        }
+    </script>
+</head>
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">Turtle Shelter Project</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/past-events">Past Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/event-request">Event Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/join-us">Join Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact-us">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <!-- Page Content -->
+    <br><br>
     <div class="container mt-5">
         <h1>Request an Event</h1>
         <p>If you are interested in hosting an event with us, please fill out the form below:</p>
 
         <!-- Event Request Form -->
         <form action="/submit-event" method="POST">
+            <!-- Event Name -->
             <div class="mb-3">
                 <label for="eventName" class="form-label">Event Name</label>
                 <input type="text" class="form-control" id="eventName" name="eventName" required>
             </div>
-            <div class="mb-3">
-                <label for="eventDate" class="form-label">Event Date</label>
-                <input type="date" class="form-control" id="eventDate" name="eventDate" required>
-            </div>
+
+            <!-- Event Description -->
             <div class="mb-3">
                 <label for="eventDescription" class="form-label">Event Description</label>
                 <textarea class="form-control" id="eventDescription" name="eventDescription" rows="3" required></textarea>
             </div>
+
+            <!-- Would you like Jen to share her story? -->
             <div class="mb-3">
-                <label for="eventLocation" class="form-label">Event Location</label>
-                <input type="text" class="form-control" id="eventLocation" name="eventLocation" required>
+                <label class="form-label">Would you like Jen to share her story at the event?</label><br>
+                <input type="radio" id="jenStoryYes" name="jenStory" value="Y" required>
+                <label for="jenStoryYes" class="mx-3">Yes</label>
+                <input type="radio" id="jenStoryNo" name="jenStory" value="N">
+                <label for="jenStoryNo" class="mx-3">No</label>
             </div>
+
+            <!-- Would you like to donate? -->
+            <div class="mb-3">
+                <label class="form-label">Would you like to donate?</label><br>
+                <input type="radio" id="donateYes" name="donate" value="Y" onchange="toggleDonationField()" required>
+                <label for="donateYes" class="mx-3">Yes</label>
+                <input type="radio" id="donateNo" name="donate" value="N" onchange="toggleDonationField()">
+                <label for="donateNo" class="mx-3">No</label>
+            </div>
+
+            <!-- Donation Amount (Conditional) -->
+            <div class="mb-3" id="donationAmount" style="display:none;">
+                <label for="donationAmount" class="form-label">Donation Amount (USD)</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="donationAmount" name="donationAmount" step="0.01" min="0">
+                </div>
+            </div>
+
+            <!-- Organization Name -->
+            <div class="mb-3">
+                <label for="organizationName" class="form-label">Organization Name</label>
+                <input type="text" class="form-control" id="organizationName" name="organizationName" required>
+            </div>
+
+            <!-- Point of Contact Details -->
+            <div class="mb-3">
+                <label for="contactName" class="form-label">Point of Contact Name</label>
+                <input type="text" class="form-control" id="contactName" name="contactName" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="contactEmail" class="form-label">Point of Contact Email</label>
+                <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="contactPhone" class="form-label">Point of Contact Phone</label>
+                <input type="tel" class="form-control" id="contactPhone" name="contactPhone" required>
+            </div>
+
+            <!-- Event Address -->
+            <div class="mb-3">
+                <label for="street" class="form-label">Street</label>
+                <input type="text" class="form-control" id="street" name="street" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <select class="form-control" id="state" name="state" required>
+                    <option value="" selected>Select State</option>
+                    <!-- List of US states and territories -->
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="DC">District of Columbia</option>
+                    <option value="AS">American Samoa</option>
+                    <option value="FM">Federated States of Micronesia</option>
+                    <option value="GU">Guam</option>
+                    <option value="MH">Marshall Islands</option>
+                    <option value="MP">Northern Mariana Islands</option>
+                    <option value="PW">Palau</option>
+                    <option value="PR">Puerto Rico</option>
+                    <option value="VI">Virgin Islands</option>
+                </select>
+            </div>
+
+            <!-- Room Size -->
+            <div class="mb-3">
+                <label for="roomSize" class="form-label">Room Size</label>
+                <select class="form-control" id="roomSize" name="roomSize" required>
+                    <option value="" selected>Select Room Size</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+
+            <!-- Event Date -->
+            <div class="mb-3">
+                <label for="eventDate" class="form-label">Event Date</label>
+                <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+            </div>
+
+            <!-- Event Start Time -->
+            <div class="mb-3">
+                <label for="startTime" class="form-label">Event Start Time</label>
+                <input type="time" class="form-control" id="startTime" name="startTime" required>
+            </div>
+
+            <!-- Event End Time -->
+            <div class="mb-3">
+                <label for="endTime" class="form-label">Event End Time</label>
+                <input type="time" class="form-control" id="endTime" name="endTime" required>
+            </div>
+
+            <!-- Event Type -->
+            <div class="mb-3">
+                <label for="eventType" class="form-label">Event Type</label>
+                <select class="form-control" id="eventType" name="eventType" required>
+                    <option value="" selected>Select Event Type</option>
+                    <option value="sewing">Sewing</option>
+                    <option value="non-sewing">Non-Sewing</option>
+                </select>
+            </div>
+
+            <!-- Expected Number of Attendees -->
+            <div class="mb-3">
+                <label for="numAttendees" class="form-label">Expected Number of Attendees</label>
+                <input type="number" class="form-control" id="numAttendees" name="numAttendees" required>
+            </div>
+
+            <!-- Expected Number of Sewers -->
+            <div class="mb-3">
+                <label for="numSewers" class="form-label">Expected Number of Sewers</label>
+                <input type="number" class="form-control" id="numSewers" name="numSewers" required>
+            </div>
+
+            <!-- Number of Sewing Machines Willing to Provide -->
+            <div class="mb-3">
+                <label for="numMachines" class="form-label">Number of Sewing Machines Willing to Provide</label>
+                <input type="number" class="form-control" id="numMachines" name="numMachines" required>
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit Event Request</button>
         </form>
     </div>
-
+    <br><br>
 
     <!-- Footer Section -->
     <footer class="text-center py-4">
         <div class="container">
-            <p>
-                <a href="#page-top" class="footer-link">© Turtle Shelter Project 2024. All Rights Reserved.</a>
-            </p>
+            <p><a href="#page-top" class="footer-link">© Turtle Shelter Project 2024. All Rights Reserved.</a></p>
         </div>
     </footer>
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
+
